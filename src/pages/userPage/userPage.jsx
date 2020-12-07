@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react'
 import {displayListOfUsers} from '../../util/SignUpLogIn/SignUpLogIn'
-import { useQuery } from "react-query";
-
- 
-const UserPage =()=>{
-
-    useEffect(()=>{
-         let users=displayListOfUsers()
-        // console.log(users)
-        // const response=useQuery("user",users) 
-         console.log(users)
-       
-        
-    })
-    return(
-        <div>
+import UsersList from '../../components/list-users/users-list'
 
 
-        </div>
-    )
+class UserPage extends React.Component{
+
+    componentDidMount(){
+
+    }
+    render(){
+        return(
+            <div>
+                <UsersList/>
+            </div>
+        )
+    }
+
 }
-
 export default UserPage

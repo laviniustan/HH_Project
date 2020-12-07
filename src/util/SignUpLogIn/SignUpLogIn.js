@@ -16,9 +16,14 @@ export const LogIn=(data)=>{
 }
 export const displayListOfUsers=async()=>{
     let data={}
-     await axios.get(`https://5f7abe8f4ebc4100161cb093.mockapi.io/api/v1/users`)
-        .then(res=>data=res.data)
-
-       return data
+   return await axios.get(`https://5f7abe8f4ebc4100161cb093.mockapi.io/api/v1/users`)
+        .then(res=>res.data)
+    //    return data
     }
-   
+
+    export  const isLogin=()=>{
+        return true
+    }
+    export  const isAdmin=()=>{
+        return false
+    }
