@@ -4,8 +4,8 @@ import SignUp from '../sign-up/sign-up'
 import NavBar from '../../components/nav-bar/nav-bar'
 const HomePage=()=>(
     <div>
-        {/* <NavBar/> */}
-  
+       <h1>Hompe Page</h1>
+
     </div>
 )
 export default HomePage

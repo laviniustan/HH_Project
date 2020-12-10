@@ -1,15 +1,19 @@
-import React from 'react';
+import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 
+// export const userContext=React.createContext()
+// const[user,setUser]=useState([localStorage.getItem('login'),localStorage.getItem('admin'),localStorage.getItem('user')])
+
 ReactDOM.render(
     <BrowserRouter>
         <React.StrictMode>
-
+         
             <App/>
+        
 
         </React.StrictMode>
     </BrowserRouter>,

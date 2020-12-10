@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useHistory,Redirect } from 'react-router-dom';
 import LockIcon from '@material-ui/icons/Lock';
 import { Avatar, Container, CssBaseline, Typography,Grid, TextField,Button, makeStyles} from '@material-ui/core';
-import {LoginQuery} from '../../util/SignUpLogIn/SignUpLogIn'
+import {useLogInAuthentication} from '../../util/SignUpLogIn/SignUpLogIn'
+import { useQuery } from "react-query";
+import axios from 'axios'
 
 const useStyles= makeStyles(theme=>({
     paper:{
@@ -25,17 +27,25 @@ const useStyles= makeStyles(theme=>({
 })
 );
 const LogIn=()=>{
-
+    const {isLoading, error, data} = useQuery(
+        'user',
+        () => axios(`https://5f7abe8f4ebc4100161cb093.mockapi.io/api/v1/users`)
+    )
+    const history=useHistory()
     const classes=useStyles()
     const [user, setUser]=useState({email:'',password:''})
     
     const onChange=(e)=>{
         setUser({...user, [e.target.name]: e.target.value })
     }
-
+    const {login,admin}= useLogInAuthentication(data,user)
+    console.log(login)
     const onSubmite=(e)=>{
         e.preventDefault()
-        //  LoginQuery(1)
+       
+        if(login) history.push('/user')
+   
+      
     }
         return(
             <Container component="main" maxWidth="xs">

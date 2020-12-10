@@ -1,7 +1,8 @@
 import { AppBar,Toolbar,IconButton,Typography,Button,makeStyles } from '@material-ui/core';
 import React, { useState } from 'react'
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from 'react-router-dom'
+import {Link, Redirect, useHistory} from 'react-router-dom'
+import {userData,logOut} from '../../util/SignUpLogIn/SignUpLogIn'
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -19,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 const NavBar=()=>{
-    const[logUser,setlogUser]=useState(false)
+    // const[logUser,setlogUser]=useState(false)
     const classes=useStyles()
-
+    const history=useHistory()
     return (
         <div className={classes.root}>
           <AppBar position="static">
@@ -33,7 +34,8 @@ const NavBar=()=>{
               <Typography edge="start" variant="h6" className={classes.title}>
                 
               </Typography>
-              {logUser? (<div><Button color="inherit" >Log In</Button> <Button color="inherit">user</Button></div>):(<Link to="/login" className={classes.link}>Log In</Link>)}
+              
+              {userData.isLogin? (<div><Button color="inherit" onClick={()=>{logOut(); <Redirect to='/'/>}} >Log out</Button> <Button color="inherit">{JSON.parse(userData.userLog).fname}</Button></div>):(<Link to="/login" className={classes.link}>Log In</Link>)}
             </Toolbar>
           </AppBar>
         </div>

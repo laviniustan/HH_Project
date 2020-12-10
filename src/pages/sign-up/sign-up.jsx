@@ -3,6 +3,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {signUp} from '../../util/SignUpLogIn/SignUpLogIn'
+import axios from 'axios'
 
 const useStyle=theme=>({
     paper:{
@@ -23,7 +24,7 @@ const useStyle=theme=>({
         margin:theme.spacing(3,0,2)
     }
 })
-
+let data={}
 class SignUp extends React.Component{
     constructor(props){
         super()
@@ -32,26 +33,31 @@ class SignUp extends React.Component{
             lastName:'',
             email:'',
             password:'',
-            isAdmin:false
+            isAdmin:true
 
         }
         this.onChange = this.onChange.bind(this)
     }
-
     onChange(e){
         console.log(e.target.name)
         this.setState({[e.target.name]:e.target.value})
     }
-    
-    onSublict(e){
-        e.preventDefault()
-            let data={
+  
+    onSubmit(e){
+        e.preventDefault();
+             data={
                 firstName:this.state.firstName,
                 lastname:this.state.lastName,
                 email:this.state.email,
-                password:this.state.password
+                password:this.state.password,
+                isAdmin:this.state.isAdmin
             }
-            signUp(data)
+
+                console.log(data)
+                 signUp(data)
+                // axios.post(`https://5f7abe8f4ebc4100161cb093.mockapi.io/api/v1/users`,{data})
+                // .then(res=>console.log("send")).catch(error=>console.log(error))
+            
     }
 
     render(){
@@ -127,6 +133,7 @@ class SignUp extends React.Component{
                                 color="primary"
                                 variant="contained"
                                 className={classes.submit}
+                                onClick={this.onSubmit.bind(this)}
                             >Sign up</Button>
                         </Grid>
                         <Grid container justify="flex-end"> 
