@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MyAccount() {
-console.log(user)
+
      
     const [edit, setEdit]=useState({firstName:user.fname,
                                     lastName:user.lname,
@@ -69,11 +69,12 @@ console.log(user)
     }
     const changeInputVal=(e)=>{
         setEdit({...edit, [e.target.name]: e.target.value })
+        // console.log(e.target.name,e.target.value, edit)
     }
     const saveEdit=()=>{
-        console.log(user.id)
+      
         let id=user.id
-         console.log(edit)
+         console.log(edit, user.id)
           putUser(id,edit)
           setisDesabled(true)
           setTimeout(function(){ window.location.reload(false) ; }, 1000);
@@ -81,7 +82,7 @@ console.log(user)
 
 
 
-    console.log(JSON.parse(userData.userLog))
+ 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -133,15 +134,15 @@ console.log(user)
             { user?  <div>
                
                { canEdit===true? <div className={classes.userEdit}>
-                <Input value={edit.fname} onChange={changeInputVal} name='firstName' />
-                <Input value={edit.lname} onChange={changeInputVal} name='lastName'  />
+                <Input value={edit.firstName} onChange={changeInputVal} name='firstName' />
+                <Input value={edit.lastName} onChange={changeInputVal} name='lastName'  />
                 <Input value={edit.email} onChange={changeInputVal} name='email'  />
                 <Input value={edit.password} onChange={changeInputVal} name='password' />
                 <Input value={edit.isAdmin} onChange={changeInputVal} name='isAdmin'  />
                 <Button onClick={saveEdit} disabled={isDesabled} >Save</Button>
                 </div>:<div>
                 <Typography paragraph>Method:</Typography>
-
+              {console.log(userData)}
                     <Typography>
                     First_Name: {JSON.parse(userData.userLog).fname}
                     </Typography>
