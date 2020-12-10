@@ -7,12 +7,15 @@ const PrivateRoute=({component:Component, ...rest})=>(
     <Route
         {...rest}
         render={(props)=>(
-             userData.isLogin? <Component {...props} />: <Redirect to='/login' />
+            
+            userData.isLogin? <Component {...props} /> : <Redirect to='/login' />
+        
+            
            
         )
         
         }
     />
 )
-// <Redirect to='/login'/>
+
 export default PrivateRoute;

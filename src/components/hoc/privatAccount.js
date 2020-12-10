@@ -1,26 +1,30 @@
 import React from 'react';
-// import {isLogin, isAdmin} from '../../util/SignUpLogIn/SignUpLogIn'
-import{userData} from '../../util/SignUpLogIn/SignUpLogIn'
-export function PrivatAccount(Component){
-     class AccessComponent extends React.Component{
 
-        render(){
-            const loginErrorMessage=(
+import {userData} from '../../util/SignUpLogIn/SignUpLogIn'
+export function PrivatAccount(Component) {
+    class AccessComponent extends React.Component {
+
+        render() {
+            const loginErrorMessage = (
                 <div>
-                   ceva nu merge
+                    ceva nu merge
                 </div>
             )
-                console.log(userData.isAdmin)
-            return(
+
+            return (
                 <div>
-                   
-                    {userData.isLogin ? <Component {...this.props}/>:loginErrorMessage}
-                    {/* {isLogin() === true ? <Component {...this.props}/>:loginErrorMessage} */}
+
+                    {
+                        userData.isLogin
+                            ? <Component {...this.props}/>
+                            : loginErrorMessage
+                    }
+
                 </div>
             )
         }
     }
-   return AccessComponent
+    return AccessComponent
 }
 
 export default PrivatAccount

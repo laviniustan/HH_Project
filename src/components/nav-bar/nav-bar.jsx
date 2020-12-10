@@ -1,6 +1,6 @@
 import { AppBar,Toolbar,IconButton,Typography,Button,makeStyles } from '@material-ui/core';
 import React, { useState } from 'react'
-import MenuIcon from '@material-ui/icons/Menu';
+
 import {Link, Redirect, useHistory} from 'react-router-dom'
 import {userData,logOut} from '../../util/SignUpLogIn/SignUpLogIn'
 const useStyles = makeStyles((theme) => ({
@@ -20,16 +20,14 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 const NavBar=()=>{
-    // const[logUser,setlogUser]=useState(false)
+
     const classes=useStyles()
     const history=useHistory()
     return (
         <div className={classes.root}>
           <AppBar position="static">
             <Toolbar>
-              {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton> */}
+
               <Link to="/" className={classes.link}>HH</Link> 
               <Typography edge="start" variant="h6" className={classes.title}>
                 

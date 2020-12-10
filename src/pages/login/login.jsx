@@ -6,6 +6,7 @@ import {useLogInAuthentication} from '../../util/SignUpLogIn/SignUpLogIn'
 import { useQuery } from "react-query";
 import axios from 'axios'
 
+
 const useStyles= makeStyles(theme=>({
     paper:{
         marginTop:theme.spacing(8),
@@ -26,7 +27,8 @@ const useStyles= makeStyles(theme=>({
     }
 })
 );
-const LogIn=()=>{
+const LogIn=(props)=>{
+    const [IsDisabled, setIsDisabled]=useState(false)
     const {isLoading, error, data} = useQuery(
         'user',
         () => axios(`https://5f7abe8f4ebc4100161cb093.mockapi.io/api/v1/users`)
@@ -39,11 +41,17 @@ const LogIn=()=>{
         setUser({...user, [e.target.name]: e.target.value })
     }
     const {login,admin}= useLogInAuthentication(data,user)
-    console.log(login)
+   
     const onSubmite=(e)=>{
         e.preventDefault()
+        //  if(login) <Redirect to='/user' />
+        
        
-        if(login) history.push('/user')
+ if(login===true){
+
+    history.push('/user')
+    window.location.reload(false)
+ }
    
       
     }
@@ -80,6 +88,7 @@ const LogIn=()=>{
                                     required
                                     fullWidth
                                     id="password"
+                                    type="password"
                                     label="password"
                                     name="password"
                                     autoComplete="current-password"
@@ -93,7 +102,9 @@ const LogIn=()=>{
                                 variant="contained"
                                 className={classes.submit}
                                 onClick={onSubmite}
+                                
                             >Log In</Button>
+                            {/* {login?<Redirect to='/user' />:null } */}
                         </Grid>
                         <Grid container justify="flex-end"> 
                               <Grid item>

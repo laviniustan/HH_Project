@@ -1,9 +1,10 @@
-import { Avatar, Container, CssBaseline, Typography,Grid, TextField,Button, withStyles, withTheme  } from '@material-ui/core';
+import { Avatar, Container, CssBaseline, Typography,Grid, TextField,Button, withStyles, withTheme,Switch  } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {signUp} from '../../util/SignUpLogIn/SignUpLogIn'
 import axios from 'axios'
+import {userData} from '../../util/SignUpLogIn/SignUpLogIn'
 
 const useStyle=theme=>({
     paper:{
@@ -33,7 +34,7 @@ class SignUp extends React.Component{
             lastName:'',
             email:'',
             password:'',
-            isAdmin:true
+            isAdmin:false
 
         }
         this.onChange = this.onChange.bind(this)
@@ -52,16 +53,22 @@ class SignUp extends React.Component{
                 password:this.state.password,
                 isAdmin:this.state.isAdmin
             }
-
+            setTimeout(function(){ window.location.reload(false) ;  }, 1000);
                 console.log(data)
                  signUp(data)
                 // axios.post(`https://5f7abe8f4ebc4100161cb093.mockapi.io/api/v1/users`,{data})
                 // .then(res=>console.log("send")).catch(error=>console.log(error))
-            
+               
+    }
+    handleChange(){
+        console.log("asd")
+        this.setState(prevState => ({
+            isAdmin: !prevState.isAdmin
+          }));
     }
 
     render(){
- 
+      
         const {classes}=this.props
         console.log(this.state)
         return(
@@ -71,9 +78,12 @@ class SignUp extends React.Component{
                     <Avatar>
                         <LockIcon/>
                     </Avatar>
-                    <Typography component="h1" variant="h5">
+                    {userData.isLogin===null?<Typography component="h1" variant="h5">
                         Sign up
-                    </Typography>
+                    </Typography>:<Typography component="h1" variant="h5">
+                        Create user
+                    </Typography>}
+                    
 
                     <form noValidate className={classes.form}>
                         <Grid container spacing={2} >
@@ -123,10 +133,12 @@ class SignUp extends React.Component{
                                     id="password"
                                     label="password"
                                     name="password"
+                                    type="password"
                                     autoComplete="current-password"
                                     onChange={this.onChange}
                                 />
                             </Grid>
+                           {userData.isLogin===null?null : <><p>isAdmin</p>  <Switch inputProps={{ 'aria-label': 'primary checkbox' }} onChange={this.handleChange.bind(this)} /></>  } 
                             <Button
                                 type="submit"
                                 fullWidth
@@ -134,14 +146,14 @@ class SignUp extends React.Component{
                                 variant="contained"
                                 className={classes.submit}
                                 onClick={this.onSubmit.bind(this)}
-                            >Sign up</Button>
+                            > {userData.isLogin===null?'Sign up ':'Create user' }   </Button>
                         </Grid>
                         <Grid container justify="flex-end"> 
                               <Grid item>
-                                    <Link to="/login"> Already have an acount? Sign In</Link>
+                                  {userData.isLogin===null?<Link to="/login"> Already have an acount? Sign In</Link>:null }  
                               </Grid>   
                         </Grid>
-
+            {console.log(userData)}
                     </form>
 
                 </div>

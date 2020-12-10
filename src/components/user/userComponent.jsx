@@ -6,6 +6,9 @@ import {deleteUser} from '../../util/user-interaction/user-interaction'
 
 import {putUser} from '../../util/user-interaction/user-interaction'
 import{signUp} from '../../util/SignUpLogIn/SignUpLogIn'
+import {userData} from '../../util/SignUpLogIn/SignUpLogIn'
+import SignUp from '../../pages/sign-up/sign-up'
+import PrivatAccount from '../hoc/privatAccount';
 
 const useStyle=makeStyles(theme=>({
     userEdit:{
@@ -19,10 +22,13 @@ const UserComponent = ({user}) => {
     
     const [edit, setEdit]=useState({firstName:'',lastName:'',email:'',password:'',isAdmin:''})
     const [canEdit, setCanEdit]=useState(false)
+    const [isDesabled, setisDesabled]=useState(false)
     const delUser = (e) => {
         console.log(user.id)
         console.log("====")
         deleteUser(user.id)
+        setisDesabled(true) 
+         setTimeout(function(){ window.location.reload(false); }, 1000);
         
     }
     const editUser=()=>{
@@ -33,17 +39,21 @@ const UserComponent = ({user}) => {
         setEdit({...edit, [e.target.name]: e.target.value })
     }
     const saveEdit=()=>{
-        console.log(user.id)
+   
         let id=user.id
-        // console.log(edit)
+     
           putUser(id,edit)
+          setisDesabled(true) 
+          setTimeout(function(){ window.location.reload(false) ; }, 1000);
+         
+
     }
     const classes=useStyle()
-    // firstName:inputFn.current.value,lastName:inputLn.current.value,email:inputEml.current.value}
+  
     return (
        
         <div>
-            {console.log(user)}
+          
 
          { user?  <div>
                  <img src={user.avatar} ></img>
@@ -54,7 +64,7 @@ const UserComponent = ({user}) => {
                 <Input value={edit.email} onChange={changeInputVal} name='email'  />
                 <Input value={edit.password} onChange={changeInputVal} name='password' />
                 <Input value={edit.isAdmin} onChange={changeInputVal} name='isAdmin'  />
-                <Button onClick={saveEdit} >Save</Button>
+                <Button onClick={saveEdit}  disabled={isDesabled} >Save</Button>
                 </div>:<div>
                 <h3>{user.firstName}</h3>
                 <h4>{user.lastName}</h4>
@@ -66,10 +76,11 @@ const UserComponent = ({user}) => {
             }
                 
             <div>
-                <Button onClick={delUser}>delet</Button>
+                <Button onClick={delUser} disabled={isDesabled} >delet</Button>
                 <Button onClick={editUser} >edit</Button>
             </div>
             </div>:null}
+       
             
         </div>
     )

@@ -17,12 +17,7 @@ export const signUp=(data)=>{
     .then(res=>console.log("send")).catch(error=>console.log(error))
 }
 
-// function getSaveValue(key, value){
-//    const saveValue=JSON.Parse(localStorage.getItem(key))
-//    if(saveValue) return saveValue
 
-//    return value
-// }
 
 export const useLogInAuthentication=(data,user)=>{
      console.log(data)
@@ -37,23 +32,29 @@ export const useLogInAuthentication=(data,user)=>{
             //  setAdmin(true)
              setLogin(true)
              localStorage.setItem("login",login)
-                // console.log(e.avatar)
-             localStorage.setItem("user",JSON.stringify({email:e.email,password:e.password,fname:e.firstName,lname:e.lasttName,avatar:e.avatar,id:e.id}))
             
-            }
-            if(e.isAdmin===true){
-                setAdmin(true)
+             localStorage.setItem("user",JSON.stringify({email:e.email,
+                                                        password:e.password,
+                                                        fname:e.firstName,
+                                                        lname:e.lastName,
+                                                        avatar:e.avatar,
+                                                        id:e.id}))
                 
+         
+                setAdmin(e.isAdmin)
+        
                 localStorage.setItem("admin",admin)
                
+            
+
+
             }
+            
          })
       
      
         }
-        // userData['isLogin']=login
-        // userData['isAdmin']=admin
-     
+
     })
 
  
@@ -61,12 +62,14 @@ export const useLogInAuthentication=(data,user)=>{
     return{login,admin,user}
     
 };
-userData.userLog=localStorage.getItem("user")
-userData.isLogin=localStorage.getItem("login")
-userData.isAdmin=localStorage.getItem("admin") 
 
-console.log("=====")
-console.log("=====",userData)
+
+    userData.userLog=localStorage.getItem("user")
+    userData.isLogin=localStorage.getItem("login")
+    userData.isAdmin=localStorage.getItem("admin") 
+    
+
+
 
 
 export const logOut=()=>{
@@ -76,5 +79,6 @@ export const logOut=()=>{
     userData.userLog= {}
     userData.isLogin=false
     userData.isAdmin= false
+    window.location.reload(false);
 
 } 

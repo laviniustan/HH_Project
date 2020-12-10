@@ -24,7 +24,9 @@ import {putUser} from '../../util/user-interaction/user-interaction'
 const user=JSON.parse(userData.userLog)
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345
+    maxWidth: 345,
+    marginLeft: "330px",
+   
   },
   media: {
     height: 0,
@@ -50,16 +52,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MyAccount() {
-
+console.log(user)
      
-    const [edit, setEdit]=useState({firstName:user.fname,lastName:user.lname,email:user.email,password:user.password,isAdmin:userData.isAdmin})
+    const [edit, setEdit]=useState({firstName:user.fname,
+                                    lastName:user.lname,
+                                    email:user.email,
+                                    password:user.password,
+                                    isAdmin:userData.isAdmin})
+
     const [canEdit, setCanEdit]=useState(false)
-    const delUser = (e) => {
-        
-        console.log("====")
-        deleteUser(user.id)
-        
-    }
+    const [isDesabled, setisDesabled]=useState(false)
+
     const editUser=()=>{
         setCanEdit(!canEdit)
        
@@ -72,6 +75,8 @@ export default function MyAccount() {
         let id=user.id
          console.log(edit)
           putUser(id,edit)
+          setisDesabled(true)
+          setTimeout(function(){ window.location.reload(false) ; }, 1000);
     }
 
 
@@ -122,7 +127,7 @@ export default function MyAccount() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <Typography>
+          <Typography>
                     My+Profyle
                     </Typography>
             { user?  <div>
@@ -133,7 +138,7 @@ export default function MyAccount() {
                 <Input value={edit.email} onChange={changeInputVal} name='email'  />
                 <Input value={edit.password} onChange={changeInputVal} name='password' />
                 <Input value={edit.isAdmin} onChange={changeInputVal} name='isAdmin'  />
-                <Button onClick={saveEdit} >Save</Button>
+                <Button onClick={saveEdit} disabled={isDesabled} >Save</Button>
                 </div>:<div>
                 <Typography paragraph>Method:</Typography>
 
@@ -158,12 +163,12 @@ export default function MyAccount() {
             }
                 
             <div>
-                <Button onClick={delUser}>delet</Button>
-                <Button onClick={editUser} >edit</Button>
+           
+                <Button onClick={editUser}  >edit</Button>
             </div>
             </div>:null}
         </CardContent>
-
+            
   
       </Collapse>
     </Card>

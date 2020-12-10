@@ -15,7 +15,8 @@ import {
     Fade
 } from '@material-ui/core';
 import {BorderAll} from '@material-ui/icons';
-import UserComponent from '../user/userComponent'
+import UserComponent from '../user/userComponent';
+import {userData} from '../../util/SignUpLogIn/SignUpLogIn'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,7 +73,7 @@ const UsersList = () => {
     const classes = useStyles();
 
     const handleOpen = (stateElem, item) => () => {
-        // console.log(user)
+      
         setOpen(true);
         setStateElem(stateElem)
         setUser(item)
@@ -112,7 +113,7 @@ const UsersList = () => {
                                             <CardActions>
                                                 <Button size="small" onClick={handleOpen(item.id, item)} id={item.id}>Info</Button>
 
-                                                {/* {  open===true? :null}  */}
+                                         
                                             </CardActions>
 
                                         </Card>
@@ -132,7 +133,8 @@ const UsersList = () => {
                         }}>
                         <Fade in={open}>
                             <div className={classes.paper}>
-                                <UserComponent user={user}/>
+                            <UserComponent user={user}/>
+                             
                             </div>
                         </Fade>
 
