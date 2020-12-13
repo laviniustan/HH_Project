@@ -21,7 +21,8 @@ import {userData} from '../../util/SignUpLogIn/SignUpLogIn'
 const useStyles = makeStyles((theme) => ({
     root: {
         //   minWidth: 275,
-        maxWidth: 500
+        maxWidth: 500,
+  
     },
     media: {
         marginLeft: 0,
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
         width: 100,
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
-        marginLeft: 150,
+        marginLeft: 110,
         marginTop: 100
     },
     modal: {
@@ -58,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
     },
     component:{
         // width:'50%'
-    }
+    },
+  
 }));
 
 const UsersList = () => {

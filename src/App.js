@@ -7,6 +7,7 @@ import SignUp from './pages/sign-up/sign-up'
 import UserPage from './pages/userPage/userPage'
 import NavBar from './components/nav-bar/nav-bar';
 import PrivateRoute from './util/privat-route/privat-route'
+import MyAccount from './components/my-account/my-account'
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,9 @@ function App() {
         <Route exact path='/signUp' component={SignUp}/>
         
         <PrivateRoute exact path='/user' component={UserPage}/>
+        <PrivateRoute exact path='/user/info' component={MyAccount}/>
+
+
       
        
     </div>

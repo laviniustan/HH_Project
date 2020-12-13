@@ -39,8 +39,7 @@ export const useLogInAuthentication=(data,user)=>{
                                                         lname:e.lastName,
                                                         avatar:e.avatar,
                                                         id:e.id}))
-                
-         
+
                 setAdmin(e.isAdmin)
         
                 localStorage.setItem("admin",admin)

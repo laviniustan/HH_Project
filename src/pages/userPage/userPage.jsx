@@ -28,15 +28,15 @@ const UserPage=()=> {
                     direction="row-reverse"
                     justify="space-evenly"
                     alignItems="center"
-                  
+            
                     >
 
                     <Grid item="item" xs={6}>
                         <UsersList/>
                     </Grid>
-                    <Grid item="item" xs={6}>
+                    {/* <Grid item="item" xs={6}>
                         <MyAccount/>
-                    </Grid>
+                    </Grid> */}
       
                     
                     {(userData.isAdmin==='true') ? <SignUp/> : <div>nu esti Admin</div>}
