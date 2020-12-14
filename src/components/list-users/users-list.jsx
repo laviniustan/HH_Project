@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3)
     },
     component:{
-        // width:'50%'
+        margin:'+5px'
     },
   
 }));
